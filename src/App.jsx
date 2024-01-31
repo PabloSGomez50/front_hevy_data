@@ -7,19 +7,18 @@ import { FaUndo } from "react-icons/fa";
 import './App.css'
 
 function App() {
+  const base_url = import.meta.env.VITE_API_BASE_URL;
   const [message, setMessage] = useState("");
   const [plot, setPlot] = useState(false);
   
   const getData = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:8000/plots/franbona');
+      const res = await axios.get(`${base_url}/plots/franbona`);
       if (res.status !== 200) {
         // This will activate the closest error.js Error Boundary
         console.log(res.status)
         throw new Error('Failed to fetch data')
       }
-      console.log(res.data);
-      console.log(Object.keys(res.data));
       setPlot(res.data);
       setMessage('Se actualizo la información de los graficos');
 
